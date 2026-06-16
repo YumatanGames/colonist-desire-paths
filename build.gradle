@@ -1,0 +1,61 @@
+plugins {
+    id 'java'
+    id 'net.neoforged.moddev' version '2.0.28'
+}
+
+version = "${mod_version}"
+group = "${mod_group_id}"
+
+base {
+    archivesName = "${mod_id}"
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+neoForge {
+    version = "${neoforge_version}"
+
+    parchment {
+        mappingsVersion = "${parchment_mappings_version}"
+        minecraftVersion = "${parchment_minecraft_version}"
+    }
+
+    runs {
+        server {
+            server()
+            programArgument '--nogui'
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+repositories {
+}
+
+dependencies {
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(ProcessResources).configureEach {
+    def replaceProperties = [
+        mod_id                      : mod_id,
+        mod_version                 : mod_version,
+        neoforge_loader_version_range: neoforge_loader_version_range,
+    ]
+    inputs.properties replaceProperties
+    filesMatching(['META-INF/neoforge.mods.toml']) {
+        expand replaceProperties
+    }
+}

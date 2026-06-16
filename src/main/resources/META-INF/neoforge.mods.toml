@@ -1,0 +1,43 @@
+modLoader="javafml"
+loaderVersion="${neoforge_loader_version_range}"
+license="MIT"
+
+[[mods]]
+    modId="${mod_id}"
+    version="${mod_version}"
+    displayName="Colonist Desire Paths"
+    logoFile=""
+    description='''
+        MineColonies colonists gradually wear desire paths into the ground
+        as they travel between buildings.
+
+        Grass / Podzol / Mycelium  →  Dirt  →  Coarse Dirt  →  Dirt Path
+
+        Only MineColonies citizens create wear.  Passive mobs, players,
+        and other entities do not affect terrain.  Farmland is always
+        protected regardless of traffic.
+
+        Erosion rates and which entity types contribute can be extended
+        via datapacks.
+    '''
+
+[[dependencies.${mod_id}]]
+    modId="neoforge"
+    type="required"
+    versionRange="${neoforge_loader_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="minecraft"
+    type="required"
+    versionRange="[1.21.1,1.22)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="minecolonies"
+    type="optional"
+    versionRange="[1.21.1-1.0,)"
+    ordering="AFTER"
+    side="SERVER"
